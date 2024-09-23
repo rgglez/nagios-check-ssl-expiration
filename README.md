@@ -19,9 +19,9 @@ This command checks the certificate for www.example.com (if any) and issues a no
 
 ## Command line parameters
 
-`--url` specifies the URL to check. Example of valid values are: https://www.example.com, example.com or www.example.com/index.html.
-`--warn` specifies the limit of days to issue a normal warning. Default value: 15 days.
-`--crit` specifies the limit of days to issue a critical warning. Default value: 7 days.
+* `--url` specifies the URL to check. Example of valid values are: https://www.example.com, example.com or www.example.com/index.html.
+* `--warn` specifies the limit of days to issue a normal warning. Default value: 15 days.
+* `--crit` specifies the limit of days to issue a critical warning. Default value: 7 days.
 
 ## Build
 
