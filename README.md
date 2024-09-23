@@ -9,7 +9,7 @@
 
 **check_ssl_expiration** is a plugin for [Nagios](https://www.nagios.org) made in [Go](https://go.dev/). It retrieves the certificate from the given URL, and compares the [notValidAfter](https://clouddocs.f5.com/api/irules/X509__not_valid_after.html) field to the warn and crit parameters (if given) to see if the certificate is about to expire. 
 
-### Usage example
+## Usage
 
 ```bash
 check_ssl_expiration --url=www.example.com --warn=10 --crit=5
@@ -22,6 +22,8 @@ This command checks the certificate for www.example.com (if any) and issues a no
 * `--url` specifies the URL to check. Example of valid values are: https://www.example.com, example.com or www.example.com/index.html.
 * `--warn` specifies the limit of days to issue a normal warning. Default value: 15 days.
 * `--crit` specifies the limit of days to issue a critical warning. Default value: 7 days.
+
+## Build and installation
 
 ### Build
 
@@ -37,7 +39,7 @@ The executable will be created inside the ```build``` directory.
 
 Just copy the executable to your regular Nagios plugins directory.
 
-### License
+## License
 
 Copyright 2024 Rodolfo González González.
 
