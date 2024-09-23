@@ -40,4 +40,5 @@ Just copy the executable to your regular Nagios plugins directory.
 ## License
 
 Copyright 2024 Rodolfo González González.
+
 [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0). Please read the [LICENSE](LICENSE.md) file.
