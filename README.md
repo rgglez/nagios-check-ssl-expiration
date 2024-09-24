@@ -12,16 +12,18 @@
 ## Usage
 
 ```bash
-check_ssl_expiration --url=www.example.com --warn=10 --crit=5
+check_ssl_expiration --host=www.example.com --warn=10 --crit=5
 ```
 
 This command checks the certificate for www.example.com (if any) and issues a normal warning if the certificate expires within 10 days, and a critical warning if it expires within 5 days.
 
 ### Command line parameters
 
-* `--url` specifies the URL to check. Example of valid values are: https://www.example.com, example.com or www.example.com/index.html.
-* `--warn` specifies the limit of days to issue a normal warning. Default value: 15 days.
-* `--crit` specifies the limit of days to issue a critical warning. Default value: 7 days.
+* `--host` or `-H` specifies the URL to check. Example of valid values are: https://www.example.com, example.com or www.example.com/index.html.
+* `--warn` or `-w` specifies the limit of days to issue a normal warning. Default value: 15 days.
+* `--crit` or `-c` specifies the limit of days to issue a critical warning. Default value: 7 days.
+* `--help` or `-h` shows the help.
+* `--version` or `-v` shows the version of the program.
 
 ## Build and installation
 

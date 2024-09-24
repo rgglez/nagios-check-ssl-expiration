@@ -22,7 +22,6 @@ package main
 import (
 	"crypto/tls"
 	"crypto/x509"
-	"flag"
 	"fmt"
 	"net/url"
 	"os"
@@ -30,6 +29,7 @@ import (
 	"time"
 
 	//"github.com/kr/pretty"
+	"github.com/spf13/pflag"
 	"github.com/xorpaul/go-nagios"
 )
 
@@ -37,10 +37,10 @@ import (
 // Flags
 
 var (
-	host    = flag.String("url", "https://localhost", "The URL from where to get the SSL certificate")
-	warn    = flag.Int("warn", 15, "How many days til expiration constitutes a WARNING?")
-	crit    = flag.Int("crit", 7, "How many days til expiration constitutes a CRITICAL alert?")
-	version = flag.Bool("version", false, "Show version number")
+	host    = pflag.StringP("host", "H", "https://localhost", "The URL from where to get the SSL certificate")
+	warn    = pflag.IntP("warn", "w", 15, "How many days til expiration constitutes a WARNING?")
+	crit    = pflag.IntP("crit", "c", 7, "How many days til expiration constitutes a CRITICAL alert?")
+	version = pflag.BoolP("version", "v", false, "Show version number")
 )
 
 //-----------------------------------------------------------------------------
@@ -101,7 +101,7 @@ func getDaysUntilExpiry(cert *x509.Certificate) int {
 func main() {
 	var nr nagios.NagiosResult
 
-	flag.Parse()
+	pflag.Parse()
 
 	if *version {
 		fmt.Println("check_nfs_client Version 0.1")
