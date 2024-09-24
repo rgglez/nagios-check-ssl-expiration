@@ -11,6 +11,8 @@
 
 ## Usage
 
+### Example
+
 ```bash
 check_ssl_expiration --host=www.example.com --warn=10 --crit=5
 ```
