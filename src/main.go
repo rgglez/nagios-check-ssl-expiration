@@ -104,7 +104,7 @@ func main() {
 	pflag.Parse()
 
 	if *version {
-		fmt.Println("check_nfs_client Version 0.1")
+		fmt.Println("check_ssl_expiration v0.1")
 		os.Exit(0)
 	}
 
