@@ -28,7 +28,6 @@ import (
 	"strings"
 	"time"
 
-	//"github.com/kr/pretty"
 	"github.com/spf13/pflag"
 	"github.com/xorpaul/go-nagios"
 )
@@ -124,10 +123,12 @@ func main() {
 
 	due := getDaysUntilExpiry(cert)
 
-	if due <= *warn {
-		nr = nagios.NagiosResult{ExitCode: 1, Text: fmt.Sprintf("warning: the SSL certificate will expire in %d days", due), Perfdata: ""}
+	if due < 0 {
+		nr = nagios.NagiosResult{ExitCode: 2, Text: fmt.Sprintf("the SSL certificate has already expired %d days ago", due*-1), Perfdata: ""}
+	} else if due <= *warn && due > *crit {
+		nr = nagios.NagiosResult{ExitCode: 1, Text: fmt.Sprintf("the SSL certificate will expire in %d days", due), Perfdata: ""}
 	} else if due <= *crit {
-		nr = nagios.NagiosResult{ExitCode: 2, Text: fmt.Sprintf("critical: the SSL certificate will expire in %d days", due), Perfdata: ""}
+		nr = nagios.NagiosResult{ExitCode: 2, Text: fmt.Sprintf("the SSL certificate will expire in %d days", due), Perfdata: ""}
 	}
 
 	nagios.NagiosExit(nr)
