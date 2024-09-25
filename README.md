@@ -7,7 +7,7 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/rgglez/nagios-check-ssl-expiration)](https://goreportcard.com/report/github.com/rgglez/nagios-check-ssl-expiration)
 [![GitHub release](https://img.shields.io/github/release/rgglez/nagios-check-ssl-expiration.svg)](https://github.com/rgglez/gormcache/releases/)
 
-**check_ssl_expiration** is a plugin for [Nagios](https://www.nagios.org) written in [Go](https://go.dev/). It retrieves the certificate from the given URL, and compares the [notValidAfter](https://clouddocs.f5.com/api/irules/X509__not_valid_after.html) field to the warn and crit parameters (if given) to see if the certificate is about to expire. 
+**check_ssl_expiration** is a plugin for [Nagios](https://www.nagios.org) written in [Go](https://go.dev/). It retrieves the SSL certificate from the given URL, and compares the [notValidAfter](https://clouddocs.f5.com/api/irules/X509__not_valid_after.html) field to the warning and critical parameters (if given) to see if the certificate is about to expire. 
 
 ## Usage
 
