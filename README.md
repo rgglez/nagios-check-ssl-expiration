@@ -29,6 +29,13 @@ This command checks the certificate for www.example.com (if any) and issues a no
 
 ## Build and installation
 
+### Get the code
+
+```bash
+$ git clone https://github.com/rgglez/nagios-check-ssl-expiration.git
+$ cd nagios-check-ssl-expiration
+```
+
 ### Build
 
 To build the program, run:
