@@ -122,13 +122,14 @@ func main() {
 	}
 
 	due := getDaysUntilExpiry(cert)
+	exp := cert.NotAfter.Local().Format(time.RFC1123)
 
 	if due < 0 {
-		nr = nagios.NagiosResult{ExitCode: 2, Text: fmt.Sprintf("the SSL certificate has already expired %d days ago", due*-1), Perfdata: ""}
+		nr = nagios.NagiosResult{ExitCode: 2, Text: fmt.Sprintf("the SSL certificate has already expired %d days ago (%s)", due*-1, exp), Perfdata: ""}
 	} else if due <= *warn && due > *crit {
-		nr = nagios.NagiosResult{ExitCode: 1, Text: fmt.Sprintf("the SSL certificate will expire in %d days", due), Perfdata: ""}
+		nr = nagios.NagiosResult{ExitCode: 1, Text: fmt.Sprintf("the SSL certificate will expire in %d days (%s)", due, exp), Perfdata: ""}
 	} else if due <= *crit {
-		nr = nagios.NagiosResult{ExitCode: 2, Text: fmt.Sprintf("the SSL certificate will expire in %d days", due), Perfdata: ""}
+		nr = nagios.NagiosResult{ExitCode: 2, Text: fmt.Sprintf("the SSL certificate will expire in %d days (%s)", due, exp), Perfdata: ""}
 	}
 
 	nagios.NagiosExit(nr)

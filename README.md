@@ -34,14 +34,20 @@ This command checks the certificate for www.example.com (if any) and issues a no
 To build the program, run:
 
 ```bash
-make go
+$ make build
 ```
 
-The executable will be created inside the ```build``` directory.
+The executable will be created inside the ```dist``` directory.
 
 ### Installation
 
-Just copy the executable to your regular Nagios plugins directory.
+To install the binary to the default path (```/usr/local/nagios/libexec```), execute:
+
+```bash
+# make install
+```
+
+Or just copy the executable to your regular Nagios plugins directory.
 
 ## License
 
