@@ -31,8 +31,8 @@ This command checks the certificate for www.example.com (if any) and issues a no
 
 ### Dependencies
 
-* [github.com/spf13/pflag](github.com/spf13/pflag)
-* [github.com/xorpaul/go-nagios](github.com/xorpaul/go-nagios)
+* [github.com/spf13/pflag](https://github.com/spf13/pflag)
+* [github.com/xorpaul/go-nagios](https://github.com/xorpaul/go-nagios)
 
 ### Get the code
 
