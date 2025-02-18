@@ -25,6 +25,7 @@ import (
 	"fmt"
 	"net/url"
 	"os"
+	"strconv"
 	"strings"
 	"time"
 
@@ -36,7 +37,8 @@ import (
 // Flags
 
 var (
-	host    = pflag.StringP("host", "H", "https://localhost", "The URL from where to get the SSL certificate")
+	host    = pflag.StringP("host", "H", "localhost", "The hostname from where to get the SSL certificate")
+	port    = pflag.IntP("port", "p", 443, "The URL from where to get the SSL certificate")
 	warn    = pflag.IntP("warn", "w", 15, "How many days til expiration constitutes a WARNING?")
 	crit    = pflag.IntP("crit", "c", 7, "How many days til expiration constitutes a CRITICAL alert?")
 	version = pflag.BoolP("version", "v", false, "Show version number")
@@ -45,7 +47,7 @@ var (
 //-----------------------------------------------------------------------------
 
 // getHostWithPort takes a URL string, parses it, and returns the host with ":443" appended
-func getHostWithPort(rawURL string) (string, error) {
+func getHostWithPort(rawURL string, port int) (string, error) {
 	// Check if the protocol is missing and prepend "https://" if necessary
 	if !strings.HasPrefix(rawURL, "http://") && !strings.HasPrefix(rawURL, "https://") {
 		rawURL = "https://" + rawURL
@@ -57,8 +59,8 @@ func getHostWithPort(rawURL string) (string, error) {
 		return "", err
 	}
 
-	// Get the host part and append ":443"
-	hostWithPort := parsedURL.Hostname() + ":443"
+	// Get the host part and append the port
+	hostWithPort := parsedURL.Hostname() + ":" + strconv.Itoa(port)
 
 	return hostWithPort, nil
 }
@@ -103,11 +105,11 @@ func main() {
 	pflag.Parse()
 
 	if *version {
-		fmt.Println("check_ssl_expiration v0.1")
+		fmt.Println("check_ssl_expiration v0.2")
 		os.Exit(0)
 	}
 
-	netUrl, err := getHostWithPort(*host)
+	netUrl, err := getHostWithPort(*host, *port)
 	if err != nil {
 		nr = nagios.NagiosResult{ExitCode: 3, Text: err.Error(), Perfdata: ""}
 		fmt.Println("Error:", err)
