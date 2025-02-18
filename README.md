@@ -21,9 +21,10 @@ This command checks the certificate for www.example.com (if any) and issues a no
 
 ### Command line parameters
 
-* `--host` or `-H` specifies the URL to check. Example of valid values are: https://www.example.com, example.com or www.example.com/index.html.
-* `--warn` or `-w` specifies the limit of days to issue a normal warning. Default value: 15 days.
-* `--crit` or `-c` specifies the limit of days to issue a critical warning. Default value: 7 days.
+* `--host` or `-H` string value which specifies the URL to check. Example of valid values are: https://www.example.com, example.com or www.example.com/index.html.
+* `--port` or `-P` int value which specifies the TCP port to use. Default value: 443.
+* `--warn` or `-w` int value which specifies the limit of days to issue a normal warning. Default value: 15 days.
+* `--crit` or `-c` int value which specifies the limit of days to issue a critical warning. Default value: 7 days.
 * `--help` or `-h` shows the help.
 * `--version` or `-v` shows the version of the program.
 
