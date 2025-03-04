@@ -37,12 +37,22 @@ import (
 // Flags
 
 var (
-	host    = pflag.StringP("host", "H", "localhost", "The hostname from where to get the SSL certificate")
-	port    = pflag.IntP("port", "p", 443, "The URL from where to get the SSL certificate")
-	warn    = pflag.IntP("warn", "w", 15, "How many days til expiration constitutes a WARNING?")
-	crit    = pflag.IntP("crit", "c", 7, "How many days til expiration constitutes a CRITICAL alert?")
-	version = pflag.BoolP("version", "v", false, "Show version number")
+	host    string
+	port    int
+	warn    int
+	crit    int
+	version bool
 )
+
+//-----------------------------------------------------------------------------
+
+func init() {
+	pflag.StringVarP(&host, "host", "H", "localhost", "The hostname from where to get the SSL certificate")
+	pflag.IntVarP(&port, "port", "p", 443, "The URL from where to get the SSL certificate")
+	pflag.IntVarP(&warn, "warn", "w", 15, "How many days til expiration constitutes a WARNING?")
+	pflag.IntVarP(&crit, "crit", "c", 7, "How many days til expiration constitutes a CRITICAL alert?")
+	pflag.BoolVarP(&version, "version", "v", false, "Show version number")
+}
 
 //-----------------------------------------------------------------------------
 
@@ -60,7 +70,12 @@ func getHostWithPort(rawURL string, port int) (string, error) {
 	}
 
 	// Get the host part and append the port
-	hostWithPort := parsedURL.Hostname() + ":" + strconv.Itoa(port)
+	var hostWithPort string
+	if parsedURL.Port() == "" {
+		hostWithPort = parsedURL.Hostname() + ":" + strconv.Itoa(port)
+	} else {
+		hostWithPort = parsedURL.Hostname() + ":" + parsedURL.Port()
+	}
 
 	return hostWithPort, nil
 }
@@ -104,12 +119,12 @@ func main() {
 
 	pflag.Parse()
 
-	if *version {
+	if version {
 		fmt.Println("check_ssl_expiration v0.2")
 		os.Exit(0)
 	}
 
-	netUrl, err := getHostWithPort(*host, *port)
+	netUrl, err := getHostWithPort(host, port)
 	if err != nil {
 		nr = nagios.NagiosResult{ExitCode: 3, Text: err.Error(), Perfdata: ""}
 		fmt.Println("Error:", err)
@@ -128,9 +143,9 @@ func main() {
 
 	if due < 0 {
 		nr = nagios.NagiosResult{ExitCode: 2, Text: fmt.Sprintf("the SSL certificate has already expired %d days ago (%s)", due*-1, exp), Perfdata: ""}
-	} else if due <= *warn && due > *crit {
+	} else if due <= warn && due > crit {
 		nr = nagios.NagiosResult{ExitCode: 1, Text: fmt.Sprintf("the SSL certificate will expire in %d days (%s)", due, exp), Perfdata: ""}
-	} else if due <= *crit {
+	} else if due <= crit {
 		nr = nagios.NagiosResult{ExitCode: 2, Text: fmt.Sprintf("the SSL certificate will expire in %d days (%s)", due, exp), Perfdata: ""}
 	}
 
