@@ -4,8 +4,10 @@
 ![GitHub all releases](https://img.shields.io/github/downloads/rgglez/nagios-check-ssl-expiration/total)
 ![GitHub issues](https://img.shields.io/github/issues/rgglez/nagios-check-ssl-expiration)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/y/rgglez/nagios-check-ssl-expiration)
-[![Go Report Card](https://goreportcard.com/badge/github.com/rgglez/nagios-check-ssl-expiration)](https://goreportcard.com/report/github.com/rgglez/nagios-check-ssl-expiration)
+[![Go Report Card](https://goreportcard.com/badge/github.com/rgglez/nagios-check-ssl-expiration/src)](https://goreportcard.com/report/github.com/rgglez/nagios-check-ssl-expiration/src)
 [![GitHub release](https://img.shields.io/github/release/rgglez/nagios-check-ssl-expiration.svg)](https://github.com/rgglez/nagios-check-ssl-expiration/releases/)
+![GitHub stars](https://img.shields.io/github/stars/rgglez/nagios-check-ssl-expiration?style=social)
+![GitHub forks](https://img.shields.io/github/forks/rgglez/nagios-check-ssl-expiration?style=social)
 
 **check_ssl_expiration** is a plugin for [Nagios](https://www.nagios.org) written in [Go](https://go.dev/). It retrieves the SSL certificate from the given URL, and compares the [notValidAfter](https://clouddocs.f5.com/api/irules/X509__not_valid_after.html) field to the warning and critical parameters (if given) to see if the certificate is about to expire. It aims to be fast and simple.
 
